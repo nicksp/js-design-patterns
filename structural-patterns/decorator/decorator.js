@@ -1,12 +1,12 @@
-'use strict';
+'use strict'
 
 /**
  * Higher order function
  */
 function compose(a, b) {
   return function (c) {
-    return a(b(c));
-  };
+    return a(b(c))
+  }
 }
 
 /**
@@ -20,24 +20,24 @@ function compose(a, b) {
  */
 function fluent(fn) {
   return function (...args) {
-    fn.apply(this, args);
-    return this;
-  };
+    fn.apply(this, args)
+    return this
+  }
 }
 
 // ES6
 function decorate(target, name, descriptor) {
-  const fn = descriptor.value;
+  const fn = descriptor.value
 
   descriptor.value = function (...args) {
-    fn.apply(target, args);
-    return target;
+    fn.apply(target, args)
+    return target
   }
 }
 
 // ES6
 function decorateWith(decorator) {
   return (target, name, descriptor) => {
-    descriptor.value = decorator.call(target, descriptor.value);
+    descriptor.value = decorator.call(target, descriptor.value)
   }
 }
