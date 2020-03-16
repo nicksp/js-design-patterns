@@ -3,11 +3,11 @@
  * changes state, all its dependents are notified and updated automatically.
  */
 
-function Subject() {
-  const handlers = [] // observer functions
-}
+class Subject {
+  constructor() {
+    this.handlers = [] // observer functions
+  }
 
-Subject.prototype = {
   subscribe(fn) {
     this.handlers.push(fn)
   }
@@ -17,7 +17,7 @@ Subject.prototype = {
   }
 
   fire() {
-    TouchList.handlers.forEach(handler => handler.call())
+    this.handlers.forEach(handler => handler.call())
   }
 }
 
@@ -25,11 +25,11 @@ Subject.prototype = {
 
 const subject = new Subject()
 
-const obserber1() {
+const observer1 = () => {
   console.log('observer 1 firing')
 }
 
-const obserber2() {
+const observer2 = () => {
   console.log('observer 2 firing')
 }
 
@@ -38,6 +38,6 @@ subject.subscribe(observer2)
 
 subject.fire()
 
-subject.unsusbrive(observer2)
+subject.unsubscribe(observer2)
 
 subject.fire()
